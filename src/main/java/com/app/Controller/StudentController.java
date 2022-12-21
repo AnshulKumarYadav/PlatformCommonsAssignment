@@ -3,6 +3,7 @@ package com.app.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,7 +16,7 @@ import com.app.Model.CurrentStudentSession;
 import com.app.Model.Student;
 import com.app.Service.StudentServiceImpl;
 
-
+@CrossOrigin
 @RestController
 public class StudentController {
 	
@@ -40,7 +41,7 @@ public class StudentController {
 		return studentServiceImpl.courseDetails(studentCode);
 	}
 	
-	@PutMapping
+	@PutMapping("/leaveCourse")
 	public Student leaveCourse(CourseAssignDTO courseToBeLeave)
 	{
 		return studentServiceImpl.leaveCourse(courseToBeLeave);
