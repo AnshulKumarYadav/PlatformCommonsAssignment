@@ -2,6 +2,8 @@ package com.app.Controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,24 +30,24 @@ public class AdminController {
 	private AdminServiceImpl adminServiceImpl;
 	
 	@PostMapping("/admin")
-	public Admin registerAdmin(@RequestBody Admin admin)
+	public Admin registerAdmin(@Valid @RequestBody Admin admin)
 	{
 		return adminServiceImpl.registerAdmin(admin);
 	}
 	
 	@PostMapping("/adminLogin")
-	public CurrentAdminSession loginAdmin(@RequestBody AdminLoginDTO adminLoginDTO)
+	public CurrentAdminSession loginAdmin(@Valid @RequestBody AdminLoginDTO adminLoginDTO)
 	{
 		return adminServiceImpl.logInAdmin(adminLoginDTO);
 	}
 	
 	@PostMapping("/admitStudent/{key}")
-	public Student admitStudent(@RequestBody Student student,@PathVariable String key) {
+	public Student admitStudent(@Valid @RequestBody Student student,@PathVariable String key) {
 		return adminServiceImpl.admitStudent(student, key);
 	}
 	
 	@PostMapping("/course/{key}")
-	public Course createCourse(@RequestBody Course course,@PathVariable String key)
+	public Course createCourse(@Valid @RequestBody Course course,@PathVariable String key)
 	{
 		return adminServiceImpl.createCourse(course, key);
 	}

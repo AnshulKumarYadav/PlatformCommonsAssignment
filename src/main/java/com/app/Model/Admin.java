@@ -27,11 +27,11 @@ public class Admin {
 	private String name;
 	
 	@NotNull
-	@Pattern(regexp = "[6-9]{1}[0-9]{9}" )
+	@Pattern(regexp = "[6-9]{1}[0-9]{9}")
 	private String mobile;
 	
 	@NotNull
-	@Pattern(regexp = "[a-zA-Z0-9]{6,12}" )
+	@Pattern(regexp = "[a-zA-Z0-9]{6,12}")
 	private String password;
 
 }
