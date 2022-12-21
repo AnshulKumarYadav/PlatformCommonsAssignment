@@ -2,6 +2,8 @@ package com.app.Controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,7 @@ public class StudentController {
     }
 	
 	@PutMapping("/student")
-	public Student updateStudent(Student student)
+	public Student updateStudent(@Valid @RequestBody Student student)
 	{
 		return studentServiceImpl.updateStudent(student);
 	}

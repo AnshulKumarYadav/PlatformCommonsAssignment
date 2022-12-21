@@ -40,7 +40,7 @@ public class StudentServiceImpl implements StudentService {
 				throw new StudentException("Student already logged in");
 			}
 			
-			if(student.getDate_of_birth().equals(studentLoginDTO.getDob()))
+			if(student.getDate_of_birth().compareTo(studentLoginDTO.getDob())==0)
 			{
 				CurrentStudentSession currentStudentSession = new CurrentStudentSession(student.getStudentID(), student.getStudentCode(), LocalDateTime.now());
 				
@@ -100,18 +100,18 @@ public class StudentServiceImpl implements StudentService {
 		CurrentStudentSession currentStudentSession = studentSessionDAO.findByStudentCode(courseToBeLeave.getStudentCode());
 		if(currentStudentSession!=null)
 		{
-			Student student = studentDAO.findByStudentCode(courseToBeLeave.getStudentCode());
+			Student s = studentDAO.findByStudentCode(courseToBeLeave.getStudentCode());
 			Course course = courseDAO.findByCourseName(courseToBeLeave.getCourseName());
-			List<Course> courses = student.getCourses();
+			List<Course> courses = s.getCourses();
 			for(Course c: courses)
 			{
 				if(c.getCourseName().equals(course.getCourseName()))
 				{
-					courses.remove(c);
+					c.getStudents().remove(c.getStudents().contains(s));
 				}
 			}
-			student.setCourses(courses);
-			return student;
+			s.setCourses(courses);
+			return new Student(s.getStudentID(), s.getName(), s.getDate_of_birth(), s.getMobile(), s.getEmail(), s.getGender(), s.getStudentCode(), s.getFathersName(), s.getMothersName(), s.getAddresses());
 			
 		}
 		throw new StudentException("Student is not logged in");

@@ -41,4 +41,17 @@ public class Course {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Student> students;
 
+	public Course(Integer courseId, @NotNull String courseName, @NotNull String description, @NotNull String courseType,
+			@NotNull String duration, @NotNull String topic) {
+		super();
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.description = description;
+		this.courseType = courseType;
+		this.duration = duration;
+		this.topic = topic;
+	}
+	
+	
+
 }

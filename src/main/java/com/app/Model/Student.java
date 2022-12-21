@@ -49,6 +49,24 @@ public class Student {
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Course> courses;
+
+	public Student(Integer studentID, @NotNull String name, @NotNull Date date_of_birth,
+			@NotNull @Pattern(regexp = "[6-9]{1}[0-9]{9}") String mobile, String email, String gender,
+			String studentCode, String fathersName, String mothersName, List<StudentAddress> addresses) {
+		super();
+		this.studentID = studentID;
+		this.name = name;
+		this.date_of_birth = date_of_birth;
+		this.mobile = mobile;
+		this.email = email;
+		this.gender = gender;
+		this.studentCode = studentCode;
+		this.fathersName = fathersName;
+		this.mothersName = mothersName;
+		this.addresses = addresses;
+	}
+	
+	
 	
 	
 

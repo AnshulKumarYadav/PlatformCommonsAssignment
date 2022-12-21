@@ -135,12 +135,25 @@ public class AdminServiceImpl implements AdminService {
 		Optional<CurrentAdminSession> currentAdmin = adminSessionDAO.findByAdminCode(key);
 		if(currentAdmin.isPresent())
 		{
-			List<Student> students = studentDAO.findByName(name);
-			if(students.isEmpty())
+			List<Student> students = studentDAO.findAll();
+			List<Student> searchedStudents = new ArrayList<>();
+			for(Student s:students)
 			{
-				throw new StudentException("No student found with this name");
+				if(s.getName().equals(name))
+				{
+					Student displayStudent = new Student(s.getStudentID(), name, s.getDate_of_birth(), s.getMobile(), s.getEmail(), s.getGender(), s.getStudentCode(), s.getFathersName(), s.getMothersName(), s.getAddresses());
+					searchedStudents.add(displayStudent);
+				}
 			}
-			return students;
+//			for(Student s: searchedStudents)
+//			{
+//				System.out.println(s.getName());
+//			}
+			if(searchedStudents.isEmpty())
+			{
+				throw new StudentException("Student not found with the name"+name);
+			}
+			return searchedStudents;
 			
 		}
 		throw new AdminException("Admin is not logged in ! ");
